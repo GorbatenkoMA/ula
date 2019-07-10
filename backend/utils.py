@@ -25,3 +25,12 @@ def get_path_upload_avatar(instance, filename):
     if os.path.exists(fullname):
         os.remove(fullname)
     return imagepath
+
+def gen_name_avatar(filename):
+    path = Path(filename)
+    name_avatar = '{stem}-{time}{suffix}'.format(
+        stem=path.stem[:50],
+        time=str(int(time())),
+        suffix=path.suffix
+    ).lower()
+    return name_avatar
