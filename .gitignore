@@ -1,0 +1,4 @@
+secrets.json
+migrations/
+__pycache__/
+*.pyc
