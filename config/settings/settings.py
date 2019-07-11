@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_extensions',
+    'adminsortable2',
 
     'backend.ula',
+    'backend.transport',
 
 ]
 

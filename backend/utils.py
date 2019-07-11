@@ -12,25 +12,16 @@ def gen_slug(value):
     new_slug = ''.join(alphabet.get(s, s) for s in slugify(value, allow_unicode=True))[:50]
     return new_slug + '-' + str(int(time()))
 
-def get_path_upload_avatar(instance, filename):
-    """
-    return: profile/username/username_avatar.jpg
-    """
+def gen_image_name(filename):
+    """ image_name.jpg -> image_name-1562836816.jpg """
     path = Path(filename)
-    imagepath = 'profile/{username}/{username}_avatar{suffix}'.format(
-        username=instance.user.username,
-        suffix=path.suffix
-    ).lower()
-    fullname = os.path.join(settings.MEDIA_ROOT, imagepath)
-    if os.path.exists(fullname):
-        os.remove(fullname)
-    return imagepath
-
-def gen_name_avatar(filename):
-    path = Path(filename)
-    name_avatar = '{stem}-{time}{suffix}'.format(
+    return '{stem}-{time}{suffix}'.format(
         stem=path.stem[:50],
         time=str(int(time())),
         suffix=path.suffix
     ).lower()
-    return name_avatar
+
+def get_path_category_avatar(instance, filename):
+    """ путь для загрузки аватарки модели ula.models.Category """
+    path = Path(filename)
+    return 'category_avatar/{}'.format(gen_image_name(filename))
