@@ -25,3 +25,8 @@ def get_path_category_avatar(instance, filename):
     """ путь для загрузки аватарки модели ula.models.Category """
     path = Path(filename)
     return 'category_avatar/{}'.format(gen_image_name(filename))
+
+def get_path_brand_avatar(instance, filename):
+    """ путь для загрузки аватарки модели transport.models.Brand """
+    path = Path(filename)
+    return 'brand_avatar/{}'.format(gen_image_name(filename))
