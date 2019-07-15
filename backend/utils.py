@@ -1,7 +1,13 @@
 from django.utils.text import slugify
+from django.conf import settings
 
 from time import time
 from pathlib import Path
+import os
+
+from backend import ula, transport
+
+
 
 alphabet = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh', 'з': 'z', 'и': 'i',
             'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
@@ -30,3 +36,23 @@ def get_path_brand_avatar(instance, filename):
     """ путь для загрузки аватарки модели transport.models.Brand """
     path = Path(filename)
     return 'brand_avatar/{}'.format(gen_image_name(filename))
+
+def get_path_color_avatar(instance, filename):
+    """ путь для загрузки аватарки модели transport.models.Color """
+    path = Path(filename)
+    return 'color_avatar/{}'.format(gen_image_name(filename))
+
+def clean_image(files, path):
+     files_del = set(os.listdir(path)) - set([Path(file).name for file in files if file])
+     for file in files_del:
+         os.remove('{}\{}'.format(path, file))
+
+def clean_image_category_avatar():
+    path = '{}\{}'.format(settings.MEDIA_ROOT, 'category_avatar')
+    files = [obj['avatar'] for obj in ula.models.Category.objects.all().values('avatar')]
+    clean_image(files, path)
+
+def clean_image_brand_avatar():
+    path = '{}\{}'.format(settings.MEDIA_ROOT, 'brand_avatar')
+    files = [obj['avatar'] for obj in ula.models.Brand.objects.all().values('avatar')]
+    clean_image(files, path)

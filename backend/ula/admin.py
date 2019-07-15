@@ -18,3 +18,4 @@ class CategoryAdmin(SortableAdminMixin, admin.ModelAdmin):
     avatar_image.short_description = 'Аватар фото'
     list_display = ('id', 'name', 'avatar_image', 'avatar', 'my_order', 'slug')
     readonly_fields = ['avatar_image',]
+    list_display_links = ('name',)
