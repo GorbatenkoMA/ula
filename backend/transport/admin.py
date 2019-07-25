@@ -12,7 +12,8 @@ from .models import (
     Transmission,
     DriveType,
     State,
-    Color
+    Color,
+    AutoAdvert
 )
 
 @admin.register(SubCategory)
@@ -20,7 +21,7 @@ class AdminSubCategory(SortableAdminMixin, admin.ModelAdmin):
     """ Подкатегории объявлений """
     list_display = ('id', 'category', 'name',  'my_order', 'slug')
     list_display_links = ('category', 'name')
-
+    
 @admin.register(Brand)
 class AdminBrandy(admin.ModelAdmin):
     """ Марка авто """
@@ -94,3 +95,37 @@ class AdminColor(admin.ModelAdmin):
     list_display = ('id', 'name', 'avatar_image', 'avatar', 'slug')
     readonly_fields = ['avatar_image',]
     list_display_links = ('name',)
+
+@admin.register(AutoAdvert)
+class AdminState(admin.ModelAdmin):
+    """ Объявление о продаже авто """
+    list_display = (
+        'id',
+        'brand',
+        'model',
+        'body_type',
+        'engine',
+        'fuel',
+        'transmission',
+        'drive_type',
+        'production_year',
+        'state',
+        'color',
+        'slug',
+        'number_door',
+        'number_seat',
+        'wheel',
+        'mileage'
+
+    )
+    list_display_links = (
+        'brand',
+        'model',
+        'body_type',
+        'engine',
+        'fuel',
+        'transmission',
+        'drive_type',
+        'state',
+        'color'
+    )

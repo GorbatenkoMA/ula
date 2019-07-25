@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'backend.ula',
     'backend.transport',
+    'backend.profiles',
 
 ]
 
